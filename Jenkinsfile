@@ -1,37 +1,27 @@
 pipeline {
-    
     agent any
-    
+
     stages {
-    
-        stage("build") {
-    
+        stage('Git Clone') {
             steps {
-    
                 script {
-                    echo 'building the application'
+                    sh 'git clone git@github.com:Rohan2111/reactapp_jenkins.git'
                 }
             }
         }
-    
-        stage("test") {
-    
+
+        stage('Docker build image') {
             steps {
-    
                 script {
-    
-                    echo 'testing the application'
+                    sh 'cd reactapp_jenkins/ && docker build -t reactapp .'
                 }
             }
         }
-    
-        stage("deploy") {
-    
-            steps {
-    
+
+        stage {
+            steps('Docker Compose Container')  {
                 script {
-    
-                    echo 'deploying the application'
+                    sh 'cd reactapp_jenkins/ && docker-compose up -d'
                 }
             }
         }
