@@ -18,8 +18,8 @@ pipeline {
             }
         }
 
-        stage {
-            steps('Docker Compose Container')  {
+        stage('Docker Compose Container') {
+            steps {
                 script {
                     sh 'cd reactapp_jenkins/ && docker-compose up -d'
                 }
