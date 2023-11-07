@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     parameters {
-        string (
-            defaultValue: 'reactapp_jenkins'
-            description: 'repo folder name'
+        string(
+            defaultValue: 'reactapp_jenkins',
+            description: 'repo folder name',
             name: 'REPO_NAME'
         )
     }
@@ -22,7 +22,7 @@ pipeline {
         stage('Git Clone') {
             steps {
                 script {
-                    sh 'git clone git@github.com:Rohan2111/reactapp_jenkins.git'
+                    sh 'git clone git@github.com:Rohan2111/${params.REPO_NAME}.git'
                 }
             }
         }
