@@ -14,7 +14,7 @@ pipeline {
         stage('Already Repo Folder Delete') {
             steps {
                 script {
-                    sh 'rm -rf ${params.REPO_NAME}'
+                    sh "rm -rf ${params.REPO_NAME}"
                 }
             }
         }
@@ -22,7 +22,7 @@ pipeline {
         stage('Git Clone') {
             steps {
                 script {
-                    sh 'git clone git@github.com:Rohan2111/${params.REPO_NAME}.git'
+                    sh "git clone git@github.com:Rohan2111/${params.REPO_NAME}.git"
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
         stage('Docker build image') {
             steps {
                 script {
-                    sh 'cd ${params.REPO_NAME}/ && docker build -t reactapp .'
+                    sh "cd ${params.REPO_NAME}/ && docker build -t reactapp ."
                 }
             }
         }
@@ -38,7 +38,7 @@ pipeline {
         stage('Docker Compose if Already Exist') {
             steps {
                 script {
-                    sh 'docker-compose down'
+                    sh "cd ${params.REPO_NAME}/ && docker-compose down"
                 }
             }
         }
@@ -46,7 +46,7 @@ pipeline {
         stage('Docker Compose Container') {
             steps {
                 script {
-                    sh 'cd ${params.REPO_NAME}/ && docker-compose up -d'
+                    sh "cd ${params.REPO_NAME}/ && docker-compose up -d"
                 }
             }
         }
