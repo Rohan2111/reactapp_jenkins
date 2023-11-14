@@ -51,4 +51,23 @@ pipeline {
             }
         }
     }
+
+    post {
+        success {
+            emailext (
+                subject: "Pipeline Successful",
+                body: "The pipeline was successful. No further action is required.",
+                to: "rohan.goswami@silverpush.co"
+            )
+        }
+        
+        failure {
+            emailext (
+                subject: "Pipeline Failed",
+                body: "The pipeline failed. Please check the Jenkins console output for details.",
+                to: "rohan.goswami@silverpush.co",
+                attachLog: true
+            )
+        }
+    }
 }
